@@ -1,9 +1,11 @@
-import { ThemeProvider } from "@/components/Providers/theme-provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ConvexClientProvider } from "@/components/Providers/convex-provider";
 import { Toaster } from "sonner";
+
+import { ConvexClientProvider } from "@/components/Providers/convex-provider";
+import { ThemeProvider } from "@/components/Providers/theme-provider";
+import { ModalProvider } from "@/components/Providers/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +45,7 @@ export default function RootLayout({
             storageKey="notion-theme"
           >
             <Toaster position="bottom-center" />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

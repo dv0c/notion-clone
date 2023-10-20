@@ -1,17 +1,17 @@
 "use client";
 
-import { Spinner } from "@/components/spinner";
-import { Input } from "@/components/ui/input";
-import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation } from "convex/react";
 import { Search, Trash, Undo } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
 import { toast } from "sonner";
-import { ConfirmModal } from "./modals/confirm-modal";
 
-const TrashBox = () => {
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { Spinner } from "@/components/spinner";
+import { Input } from "@/components/ui/input";
+import { ConfirmModal } from "./modals/confirm-modal";
+export const TrashBox = () => {
   const router = useRouter();
   const params = useParams();
   const documents = useQuery(api.documents.getTrash);
@@ -38,7 +38,7 @@ const TrashBox = () => {
     toast.promise(promise, {
       loading: "Restoring note...",
       success: "Note restored!",
-      error: "Failed to restore note.",
+      error: " Failed to restore note.",
     });
   };
 
@@ -48,7 +48,7 @@ const TrashBox = () => {
     toast.promise(promise, {
       loading: "Deleting note...",
       success: "Note deleted!",
-      error: "Failed to delete note.",
+      error: " Failed to delete note.",
     });
 
     if (params.documentId === documentId) {
@@ -76,7 +76,7 @@ const TrashBox = () => {
         />
       </div>
       <div className="mt-2 px-1 pb-1">
-        <p className="hidden last:block text-sm text-center text-muted-foreground pb-2">
+        <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
           No documents found.
         </p>
         {filteredDocuments?.map((document) => (
@@ -91,14 +91,14 @@ const TrashBox = () => {
               <div
                 onClick={(e) => onRestore(e, document._id)}
                 role="button"
-                className="rounded-sm p-2 hover:bg-netural-200"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </div>
               <ConfirmModal onConfirm={() => onRemove(document._id)}>
                 <div
                   role="button"
-                  className="rounded-sm p-2 hover:bg-neutral-200"
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                 >
                   <Trash className="h-4 w-4 text-muted-foreground" />
                 </div>
@@ -110,5 +110,3 @@ const TrashBox = () => {
     </div>
   );
 };
-
-export default TrashBox;
