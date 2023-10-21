@@ -30,6 +30,7 @@ import { DocumentList } from "./DocumentList";
 import { TrashBox } from "./TrashBox";
 import { Navbar } from "./Navbar";
 import UserItem from "./user-item";
+import FavoriteList from "./FavoriteList";
 
 export const Navigation = () => {
   const router = useRouter();
@@ -160,6 +161,7 @@ export const Navigation = () => {
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
+          <FavoriteList />
           <DocumentList />
           <Item onClick={handleCreate} icon={Plus} label="Add a page" />
           <Popover>

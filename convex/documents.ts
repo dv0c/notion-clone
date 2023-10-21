@@ -97,9 +97,29 @@ export const create = mutation({
       userId,
       isArchived: false,
       isPublished: false,
+      favorite: false,
     });
 
     return document;
+  },
+});
+
+export const getFavorites = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    const userId = identity.subject;
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("favorite"), true))
+      .order("desc")
+      .collect();
+    return documents;
   },
 });
 
@@ -266,6 +286,7 @@ export const update = mutation({
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
+    favorite: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
