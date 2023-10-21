@@ -244,8 +244,14 @@ export const getSearch = query({
       .filter((q) => q.eq(q.field("isArchived"), false))
       .order("desc")
       .collect();
+    const favorites = await ctx.db
+      .query("documents")
+      .withIndex("by_user", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("favorite"), true))
+      .order("desc")
+      .collect();
 
-    return documents;
+    return { documents, favorites };
   },
 });
 

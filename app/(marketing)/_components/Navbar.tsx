@@ -32,7 +32,11 @@ const Navbar = () => {
                 Log In
               </Button>
             </SignInButton>
-            <SignInButton mode="modal">
+            <SignInButton
+              mode="modal"
+              afterSignInUrl="/documents"
+              afterSignUpUrl="/documents"
+            >
               <Button size={"sm"}>Get Notion free</Button>
             </SignInButton>
           </>
@@ -45,7 +49,7 @@ const Navbar = () => {
             >
               Enter Notion
             </Link>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton afterSignOutUrl="/documents" />
           </>
         )}
         <ModeToggle />

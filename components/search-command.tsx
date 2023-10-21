@@ -58,10 +58,27 @@ export const SearchCommand = () => {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Documents">
-          {documents?.map((document) => (
+          {documents?.documents?.map((document) => (
             <CommandItem
               key={document._id}
               value={`${document._id}-${document.title}`}
+              title={document.title}
+              onSelect={() => onSelect(document._id)}
+            >
+              {document.icon ? (
+                <p className="mr-2 text-[18px]">{document.icon}</p>
+              ) : (
+                <File className="mr-2 h-4 w-4" />
+              )}
+              <span>{document.title}</span>
+            </CommandItem>
+          ))}
+        </CommandGroup>
+        <CommandGroup heading="Saved">
+          {documents?.favorites?.map((document, _$) => (
+            <CommandItem
+              key={document._id + _$}
+              value={`${document._id + _$}}-${document.title}`}
               title={document.title}
               onSelect={() => onSelect(document._id)}
             >

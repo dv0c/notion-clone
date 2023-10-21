@@ -6,6 +6,7 @@ import {
   LucideIcon,
   MoreHorizontal,
   Plus,
+  Star,
   Trash,
 } from "lucide-react";
 import { useMutation } from "convex/react";
@@ -36,6 +37,7 @@ interface ItemProps {
   label: string;
   onClick?: () => void;
   icon: LucideIcon;
+  favorite?: boolean;
 }
 
 export const Item = ({
@@ -49,6 +51,7 @@ export const Item = ({
   level = 0,
   onExpand,
   expanded,
+  favorite,
 }: ItemProps) => {
   const { user } = useUser();
   const router = useRouter();
@@ -113,7 +116,15 @@ export const Item = ({
           className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
           onClick={handleExpand}
         >
-          <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
+          {favorite && (
+            <Star
+              className="h-4 w-4 shrink-0 text-muted-foreground/50"
+              fill="bg-black"
+            />
+          )}
+          {!favorite && (
+            <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
+          )}
         </div>
       )}
       {documentIcon ? (
@@ -127,6 +138,7 @@ export const Item = ({
           <span className="text-xs">⌘</span>K
         </kbd>
       )}
+
       {!!id && (
         <div className="ml-auto flex items-center gap-x-2">
           <DropdownMenu>
