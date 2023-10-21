@@ -127,7 +127,7 @@ export const Toolbar = ({ initialData, preview }: IProps) => {
             "pb-[11.5px] text-5xl font-bold break-words outline-none text-[#3F3F3F] resize-none dark:text-[#CFCFCF]"
           }
         >
-          {initialData.title}
+          <div>{initialData.title}</div>
         </div>
       )}
     </div>
