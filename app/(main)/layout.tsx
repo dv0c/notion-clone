@@ -7,9 +7,15 @@ import { Spinner } from "@/components/spinner";
 import { SearchCommand } from "@/components/search-command";
 
 import { Navigation } from "./_components/Navigation";
-
+import { useEffect } from "react";
+import { currWidth } from "@/PublicVariables";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
+
+  useEffect(() => {
+    if (!localStorage.getItem("editorWidth"))
+      localStorage.setItem("editorWidth", currWidth);
+  }, []);
 
   if (isLoading) {
     return (

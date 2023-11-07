@@ -1,3 +1,5 @@
+"use client";
+import { maxWidth, minWidth } from "@/PublicVariables";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,7 +13,7 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useUser } from "@clerk/clerk-react";
 import { useMutation } from "convex/react";
-import { MoreHorizontal, Trash } from "lucide-react";
+import { LayoutDashboard, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -36,6 +38,16 @@ export const Menu = ({ documentId }: IProps) => {
     router.push("/documents");
   };
 
+  const handleWidth = () => {
+    if (localStorage.getItem("editorWidth") === minWidth) {
+      localStorage.setItem("editorWidth", maxWidth);
+      router.refresh();
+    } else {
+      localStorage.setItem("editorWidth", minWidth);
+      router.refresh();
+    }
+  };
+
   return (
     <div>
       <DropdownMenu>
@@ -50,6 +62,11 @@ export const Menu = ({ documentId }: IProps) => {
           alignOffset={8}
           forceMount
         >
+          <DropdownMenuItem onClick={handleWidth}>
+            <LayoutDashboard className="h-4 w-4 mr-2" />
+            Change Width
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={onArchive}>
             <Trash className="h-4 w-4 mr-2" />
             Delete
