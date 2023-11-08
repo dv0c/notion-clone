@@ -1,6 +1,6 @@
 "use client";
 
-import { Doc } from "@/convex/_generated/dataModel";
+import { Doc, Id } from "@/convex/_generated/dataModel";
 import { IconPicker } from "./IconPicker";
 import { Button } from "./ui/button";
 import { ImageIcon, Smile, X } from "lucide-react";
@@ -64,6 +64,19 @@ export const Toolbar = ({ initialData, preview }: IProps) => {
     });
   };
 
+  const randomImage = async () => {};
+
+  const randomCover = async () => {
+    await fetch(
+      "https://source.unsplash.com/random/1080%C3%971090/?painting,history,vintage"
+    ).then(async (res) => {
+      await update({
+        id: initialData._id as Id<"documents">,
+        coverImage: res.url,
+      });
+    });
+  };
+
   return (
     <div className="pl-[54px] group relative">
       {!!initialData.icon && !preview && (
@@ -104,7 +117,7 @@ export const Toolbar = ({ initialData, preview }: IProps) => {
             className="text-muted-foreground text-xs"
             variant={"outline"}
             size={"sm"}
-            onClick={coverImage.onOpen}
+            onClick={randomCover}
           >
             <ImageIcon className="h-4 w-4 mr-2" />
             Add cover

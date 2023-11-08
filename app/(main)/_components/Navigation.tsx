@@ -162,6 +162,7 @@ export const Navigation = () => {
         </div>
         <div className="mt-4">
           <FavoriteList />
+          <h1 className="text-xs text-muted-foreground pl-4 mb-2">Private</h1>
           <DocumentList />
           <Item onClick={handleCreate} icon={Plus} label="Add a page" />
           <Popover>

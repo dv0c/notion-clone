@@ -21,11 +21,10 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   const { edgestore } = useEdgeStore();
   const params = useParams();
   const coverImage = useCoverImage();
-
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
   const onRemove = async () => {
-    if (url) {
+    if (url && !url.includes("images.unsplash.com")) {
       await edgestore.publicFiles.delete({
         url: url,
       });
@@ -45,7 +44,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
     >
       {!!url && <Image src={url} fill alt="Cover" className="object-cover" />}
       {url && !preview && (
-        <div className="md:opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
+        <div className="md:opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-1">
           <Button
             onClick={() => coverImage.onReplace(url)}
             className="text-muted-foreground text-xs"

@@ -55,7 +55,7 @@ export const Favorite = ({ initialData }: IProps) => {
           disabled={isSubmitting}
           onClick={onRemove}
         >
-          <Star className="w-4 h-4" fill="bg-black" />
+          <Star className="w-4 h-4 text-muted-foreground fill-muted-foreground" />
           {initialData.favorite}
         </Button>
       ) : (

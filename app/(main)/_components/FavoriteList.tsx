@@ -20,7 +20,7 @@ const FavoriteList = ({ documentId }: DocumentListProps) => {
   const document = useQuery(api.documents.getFavorites);
 
   if (document === undefined) {
-    return <>Loading</>;
+    return null;
   }
 
   const onRedirect = (documentId: string) => {
@@ -29,19 +29,26 @@ const FavoriteList = ({ documentId }: DocumentListProps) => {
 
   return (
     <>
+      {document.length > 0 && (
+        <h1 className="text-xs text-muted-foreground pl-4 mb-2">Favorites</h1>
+      )}
+
       <div className="mb-3">
         {document.map((document) => (
-          <div key={document._id}>
-            <Item
-              id={document._id}
-              onClick={() => onRedirect(document._id)}
-              label={document.title}
-              icon={FileIcon}
-              documentIcon={document.icon}
-              active={params.documentId === document._id}
-              onExpand={() => {}}
-              favorite={document.favorite}
-            />
+          <div key={document._id + "div"}>
+            {!document.isArchived && (
+              <div key={document._id + "fav"}>
+                <Item
+                  id={document._id}
+                  onClick={() => onRedirect(document._id)}
+                  label={document.title}
+                  icon={FileIcon}
+                  documentIcon={document.icon}
+                  active={params.documentId === document._id}
+                  favorite={document.favorite}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
