@@ -82,7 +82,7 @@ export const Toolbar = ({ initialData, preview }: IProps) => {
       {!!initialData.icon && !preview && (
         <div
           className="flex items-center gap-x-2 group/icon"
-          style={{ marginTop: "-37px" }}
+          style={{ marginTop: "-35px" }}
         >
           <IconPicker onChange={onIconSelect}>
             <p className="text-6xl hover:opacity-75 transition">
