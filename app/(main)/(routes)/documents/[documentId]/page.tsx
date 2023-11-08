@@ -1,6 +1,5 @@
 "use client";
 
-import { currWidth } from "@/PublicVariables";
 import { Cover } from "@/components/Cover";
 import { Toolbar } from "@/components/Toolbar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -59,7 +58,10 @@ const DocumentIdPage = ({ params }: IProps) => {
   return (
     <div className="pb-40">
       <Cover url={document.coverImage} />
-      <div className={cn("mx-auto", localStorage.getItem("editorWidth"))}>
+      <div
+        style={{ maxWidth: `${localStorage.getItem("editorWidth")}` }}
+        className={cn("mx-auto transition-all ease-in-out duration-300")}
+      >
         <Toolbar initialData={document} />
         <Editor onChange={onChange} initialContent={document.content} />
       </div>

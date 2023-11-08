@@ -8,13 +8,13 @@ import { SearchCommand } from "@/components/search-command";
 
 import { Navigation } from "./_components/Navigation";
 import { useEffect } from "react";
-import { currWidth } from "@/PublicVariables";
+import { minWidth } from "@/PublicVariables";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   useEffect(() => {
     if (!localStorage.getItem("editorWidth"))
-      localStorage.setItem("editorWidth", currWidth);
+      localStorage.setItem("editorWidth", minWidth);
   }, []);
 
   if (isLoading) {
