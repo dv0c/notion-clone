@@ -30,7 +30,9 @@ const FavoriteList = ({ documentId }: DocumentListProps) => {
   return (
     <>
       {document.length > 0 && (
-        <h1 className="text-xs text-muted-foreground pl-4 mb-2">Favorites</h1>
+        <h1 className="text-xs select-none font-semibold text-muted-foreground pl-4 mb-2">
+          Favorites
+        </h1>
       )}
 
       <div className="mb-3">
