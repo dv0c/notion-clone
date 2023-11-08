@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useUser } from "@clerk/clerk-react";
@@ -38,7 +39,8 @@ export const Menu = ({ documentId }: IProps) => {
     router.push("/documents");
   };
 
-  const handleWidth = () => {
+  const handleWidth = (e: any) => {
+    e.preventDefault();
     if (localStorage.getItem("editorWidth") === minWidth) {
       localStorage.setItem("editorWidth", maxWidth);
       router.refresh();
@@ -57,14 +59,19 @@ export const Menu = ({ documentId }: IProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="w-60"
+          className="w-60 rounded-xl"
           align="end"
           alignOffset={8}
           forceMount
         >
-          <DropdownMenuItem onClick={handleWidth}>
-            <LayoutDashboard className="h-4 w-4 mr-2" />
-            Change Width
+          <DropdownMenuItem
+            className="flex cursor-pointer justify-between"
+            onClick={(e) => handleWidth(e)}
+          >
+            Full width
+            <Switch
+              checked={localStorage.getItem("editorWidth") === maxWidth}
+            />
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={onArchive}>
