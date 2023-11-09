@@ -1,27 +1,14 @@
 "use client";
 
-import {
-  Block,
-  BlockNoteEditor,
-  BlockSchema,
-  PartialBlock,
-  defaultBlockSchema,
-  defaultProps,
-} from "@blocknote/core";
+import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
 
-import {
-  BlockNoteView,
-  InlineContent,
-  ReactSlashMenuItem,
-  createReactBlockSpec,
-  getDefaultReactSlashMenuItems,
-  useBlockNote,
-} from "@blocknote/react";
+import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { useTheme } from "next-themes";
 
 import { useEdgeStore } from "@/lib/edgestore";
-import { Image } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -30,6 +17,7 @@ interface EditorProps {
 }
 
 const Editor = ({ onChange, editable, initialContent }: EditorProps) => {
+  const router = useRouter();
   const { edgestore } = useEdgeStore();
 
   const handleUpload = async (file: File) => {
@@ -42,6 +30,13 @@ const Editor = ({ onChange, editable, initialContent }: EditorProps) => {
   const { resolvedTheme } = useTheme();
 
   const editor: BlockNoteEditor = useBlockNote({
+    domAttributes: {
+      // Adds a class to all `blockContainer` elements.
+      blockContainer: {
+        class: "block-container",
+        style: "font-family: " + localStorage.getItem("_EditorFont_"),
+      },
+    },
     editable,
     initialContent: initialContent
       ? (JSON.parse(initialContent) as PartialBlock[])
@@ -56,6 +51,7 @@ const Editor = ({ onChange, editable, initialContent }: EditorProps) => {
       const selectedBlockIds: Set<string> = new Set<string>(
         selectedBlocks?.map((block) => block.id) || []
       );
+
       editor.forEachBlock((block) => {
         // If no selection is active, resets the background color of each block.
         if (selectedBlockIds.size === 0) {
@@ -92,6 +88,10 @@ const Editor = ({ onChange, editable, initialContent }: EditorProps) => {
 
     uploadFile: handleUpload,
   });
+
+  useEffect(() => {
+    editor;
+  }, [localStorage.getItem("_EditorFont_")]);
 
   return (
     <div>
