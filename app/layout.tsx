@@ -12,18 +12,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Notion",
-  description: "A simple Notion clone built with Next.js",
+  description: "Notion clone built with Next.js",
   icons: {
     icon: [
       {
         media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
-        href: "/logo.svg",
+        url: "/not-white.webp",
+        href: "/not-white.webp",
       },
       {
         media: "(prefers-color-scheme: dark)",
-        url: "/logo-dark.svg",
-        href: "/logo-dark.svg",
+        url: "/not-black.png",
+        href: "/not-black.png",
       },
     ],
   },
