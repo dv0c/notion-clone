@@ -12,14 +12,14 @@ const Logo = () => {
   return (
     <div className="flex items-center gap-x-2">
       <Image
-        src={"/not-white.webp"}
+        src={"/not-dark.png"}
         height={"40"}
         width={"40"}
         alt="Logo"
         className="dark:hidden"
       />
       <Image
-        src={"/not-dark.png"}
+        src={"/not-white.webp"}
         height={"40"}
         width={"40"}
         alt="Logo"
