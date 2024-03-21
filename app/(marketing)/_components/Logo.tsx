@@ -12,7 +12,7 @@ const Logo = () => {
   return (
     <div className="flex items-center gap-x-2">
       <Image
-        src={"/not-dark.png"}
+        src={"/not-black.png"}
         height={"40"}
         width={"40"}
         alt="Logo"
